@@ -15,6 +15,14 @@ import { LoggerService } from './logger.service';
       provide: 'LOGGER',
       useClass: LoggerService,
     },
+    {
+      provide: 'DEMO_FACTORY',
+      useFactory: logger => {
+        logger.log('This message came from a provider factory.');
+        return 'Demo factory.';
+      },
+      inject: ['LOGGER'],
+    },
   ],
 })
 export class AppModule {}
