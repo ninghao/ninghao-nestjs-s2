@@ -3,10 +3,16 @@ import { LoggerService } from './logger.service';
 
 @Module({})
 export class LoggerModule {
-  static regisiter(): DynamicModule {
+  static regisiter(prefix: string): DynamicModule {
     return {
       module: LoggerModule,
-      providers: [LoggerService],
+      providers: [
+        LoggerService,
+        {
+          provide: 'PREFIX',
+          useValue: prefix,
+        },
+      ],
       exports: [LoggerService],
     };
   }
