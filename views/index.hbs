@@ -11,6 +11,7 @@
 
 <body>
   <h1>{{title}}</h1>
+  <button id="main-button">Button</button>
 
   <script>
     const socket = io('http://localhost:3001/app');
@@ -21,6 +22,12 @@
 
     socket.on('disconnect', () => {
       console.log('Disconnected');
+    });
+
+    document.querySelector('#main-button').addEventListener('click', () => {
+      socket.emit('events', '#main-button was clicked.', (data) => {
+        console.log(data);
+      });
     });
   </script>
 </body>
