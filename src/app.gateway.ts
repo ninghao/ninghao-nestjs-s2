@@ -4,6 +4,7 @@ import {
   MessageBody,
   OnGatewayConnection,
   OnGatewayDisconnect,
+  ConnectedSocket,
 } from '@nestjs/websockets';
 import { Socket } from 'socket.io';
 
@@ -18,7 +19,9 @@ export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
   }
 
   @SubscribeMessage('events')
-  handleEvent(@MessageBody() data: string) {
+  handleEvent(@MessageBody() data: string, @ConnectedSocket() client: Socket) {
+    client.emit('message', 'Send a message.');
+    client.broadcast.emit('message', `${client.id}: Broadcast.`);
     console.log(data);
     return 'Server: got it!';
   }
