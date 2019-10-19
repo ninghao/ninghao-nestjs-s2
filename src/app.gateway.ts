@@ -19,10 +19,17 @@ export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
   }
 
   @SubscribeMessage('events')
-  handleEvent(@MessageBody() data: string, @ConnectedSocket() client: Socket) {
-    client.emit('message', 'Send a message.');
-    client.broadcast.emit('message', `${client.id}: Broadcast.`);
+  handleEvent(@MessageBody() data: string) {
     console.log(data);
     return 'Server: got it!';
+  }
+
+  @SubscribeMessage('message')
+  handleMessage(
+    @MessageBody() data: string,
+    @ConnectedSocket() client: Socket,
+  ) {
+    client.broadcast.emit('message', `${client.id}: ${data}`);
+    return data;
   }
 }
