@@ -6,3 +6,8 @@
 type Query {
   getHello: String!
 }
+
+type User {
+  id: ID!
+  name: String!
+}
