@@ -1,4 +1,10 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Args,
+  ResolveProperty,
+  Parent,
+} from '@nestjs/graphql';
 import { User } from './user.model';
 import { UserService } from './user.service';
 
@@ -14,5 +20,10 @@ export class UserResolver {
   @Query(returns => User, { name: 'user' })
   getUser(@Args('id') id: string) {
     return this.userService.findOneById(id);
+  }
+
+  @ResolveProperty(type => String)
+  nameDashId(@Parent() user: User) {
+    return `${user.name}-${user.id}`;
   }
 }
