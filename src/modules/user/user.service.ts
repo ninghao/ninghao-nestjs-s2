@@ -7,4 +7,8 @@ export class UserService {
   findAll() {
     return this.data.users;
   }
+
+  findOneById(id: string) {
+    return this.data.users.filter(item => item.id === id)[0];
+  }
 }
