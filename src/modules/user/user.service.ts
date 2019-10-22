@@ -1,4 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
+import { User } from './user.model';
 
 @Injectable()
 export class UserService {
@@ -10,5 +11,9 @@ export class UserService {
 
   findOneById(id: string) {
     return this.data.users.filter(item => item.id === id)[0];
+  }
+
+  getPostsByUser(user: User) {
+    return this.data.posts.filter(item => item.userId === user.id);
   }
 }

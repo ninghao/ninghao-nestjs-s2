@@ -7,6 +7,7 @@ import {
 } from '@nestjs/graphql';
 import { User } from './user.model';
 import { UserService } from './user.service';
+import { Post } from '../post/post.model';
 
 @Resolver(User)
 export class UserResolver {
@@ -25,5 +26,10 @@ export class UserResolver {
   @ResolveProperty(type => String)
   nameDashId(@Parent() user: User) {
     return `${user.name}-${user.id}`;
+  }
+
+  @ResolveProperty('posts', type => [Post])
+  getUserPosts(@Parent() user: User) {
+    return this.userService.getPostsByUser(user);
   }
 }
