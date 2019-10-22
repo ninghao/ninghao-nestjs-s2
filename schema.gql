@@ -5,6 +5,7 @@
 
 type Query {
   getHello: String!
+  users: [User!]!
 }
 
 type User {
