@@ -4,6 +4,7 @@ import {
   Args,
   ResolveProperty,
   Parent,
+  Mutation,
 } from '@nestjs/graphql';
 import { User } from './user.model';
 import { UserService } from './user.service';
@@ -31,5 +32,10 @@ export class UserResolver {
   @ResolveProperty('posts', type => [Post])
   getUserPosts(@Parent() user: User) {
     return this.userService.getPostsByUser(user);
+  }
+
+  @Mutation(returns => User)
+  updateUserName(@Args('id') id: string, @Args('newName') newName: string) {
+    return this.userService.updateUserName(id, newName);
   }
 }

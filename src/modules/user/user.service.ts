@@ -16,4 +16,11 @@ export class UserService {
   getPostsByUser(user: User) {
     return this.data.posts.filter(item => item.userId === user.id);
   }
+
+  updateUserName(id: string, newName: string) {
+    const users = this.data.users;
+    const index = users.findIndex(item => item.id === id);
+    users[index].name = newName;
+    return users[index];
+  }
 }

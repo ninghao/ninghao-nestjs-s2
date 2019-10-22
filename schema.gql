@@ -3,6 +3,10 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type Mutation {
+  updateUserName(newName: String!, id: String!): User!
+}
+
 type Post {
   id: ID!
   title: String!
