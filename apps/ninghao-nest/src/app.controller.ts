@@ -12,6 +12,7 @@ export class AppController {
 
   @Get()
   getHello(): Observable<string> {
+    this.client.emit('log', 'this is a test.');
     return this.client.send('greet', 'ninghao');
   }
 }
