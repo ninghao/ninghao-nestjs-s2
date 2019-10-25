@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+import { EventPattern, Payload } from '@nestjs/microservices';
 import { AppService } from './app.service';
 
 @Controller()
@@ -8,5 +9,10 @@ export class AppController {
   @Get()
   getHello(): string {
     return this.appService.getHello();
+  }
+
+  @EventPattern('log')
+  log(@Payload() data: string) {
+    console.log(`Log event (nest-3): ${data}`);
   }
 }
