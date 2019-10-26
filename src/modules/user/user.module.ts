@@ -5,6 +5,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { UserCreatedEventHandler } from './events/user-created.event.handler';
 import { UserSage } from './sagas/user.saga';
 import { SendWelcomeMessageCommandHandler } from './commands/send-welcome-message.command.handler';
+import { GetUsersQueryHandler } from './queries/get-users.query.handler';
 
 @Module({
   imports: [CqrsModule],
@@ -14,6 +15,7 @@ import { SendWelcomeMessageCommandHandler } from './commands/send-welcome-messag
     UserCreatedEventHandler,
     UserSage,
     SendWelcomeMessageCommandHandler,
+    GetUsersQueryHandler,
   ],
 })
 export class UserModule {}
